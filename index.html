@@ -13,7 +13,6 @@
 :root{
   --bg:#f4f9ff;
   --bg2:#ffffff;
-  --card:#ffffff;
   --text:#0f172a;
   --muted:#5b6b84;
   --blue:#1f7cff;
@@ -181,52 +180,6 @@ header.hero{
   background:var(--accent);
   color:var(--blue);
 }
-.lang-switch{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:8px 10px;
-  border:1px solid var(--line);
-  border-radius:999px;
-  background:#fff;
-  flex-wrap:wrap;
-}
-.lang-label{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  color:var(--blue);
-  font-size:13px;
-  font-weight:800;
-  padding:0 6px;
-}
-.lang-btn{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:10px 14px;
-  border-radius:999px;
-  border:1px solid transparent;
-  background:#fff;
-  color:#29405f;
-  font-size:13px;
-  font-weight:800;
-  transition:.25s;
-}
-.lang-btn img{
-  width:18px;height:18px;
-  border-radius:50%;
-  object-fit:cover;
-}
-.lang-btn:hover{
-  transform:translateY(-1px);
-  background:var(--accent);
-  border-color:var(--line);
-}
-.lang-btn.active{
-  background:linear-gradient(135deg,var(--blue),var(--blue2));
-  color:#fff;
-}
 .hero-content{
   position:relative;
   z-index:2;
@@ -321,11 +274,6 @@ header.hero{
   grid-template-columns:repeat(3,1fr);
   gap:22px;
 }
-.grid-2{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:22px;
-}
 .service-card,
 .room-card,
 .spec-card,
@@ -346,65 +294,29 @@ header.hero{
   border-color:rgba(31,124,255,.25);
 }
 .service-icon{
-  width:64px;height:64px;
-  border-radius:20px;
+  width:96px;
+  height:96px;
+  border-radius:28px;
   display:grid;
   place-items:center;
-  font-size:28px;
-  background:linear-gradient(145deg,#eaf4ff,#dbeeff);
+  background:linear-gradient(145deg,#f2f8ff,#dbeeff);
   margin-bottom:18px;
-  color:var(--blue);
+  overflow:hidden;
+  padding:10px;
 }
-.service-card h3,
-.room-card h3,
-.spec-card h3,
-.review-card h3{
+.service-icon svg{
+  width:100%;
+  height:100%;
+  display:block;
+}
+.service-card h3{
   margin:0 0 10px;
   font-size:22px;
 }
-.service-card p,
-.room-card p,
-.spec-card p,
-.review-card p,
-.contact-card p{
+.service-card p{
   margin:0;
   color:var(--muted);
   line-height:1.75;
-}
-.spec-card{padding:18px}
-.spec-card .photo{
-  height:270px;
-  border-radius:20px;
-  overflow:hidden;
-  margin-bottom:16px;
-}
-.spec-card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-.spec-card .role{
-  color:var(--blue);
-  font-size:13px;
-  font-weight:800;
-  margin-bottom:8px;
-}
-.review-card{padding:24px}
-.stars{
-  color:#f4b400;
-  letter-spacing:2px;
-  margin-bottom:12px;
-}
-.reviewer{
-  margin-top:18px;
-  color:var(--text);
-  font-weight:900;
-}
-.reviewer small{
-  display:block;
-  color:var(--muted);
-  font-weight:500;
-  margin-top:4px;
 }
 .form{
   display:grid;
@@ -442,9 +354,7 @@ input:focus,select:focus,textarea:focus{
   border-color:rgba(31,124,255,.45);
   box-shadow:0 0 0 4px rgba(31,124,255,.08);
 }
-#nomer{
-  font-variant-numeric: tabular-nums;
-}
+#nomer{font-variant-numeric:tabular-nums;}
 .hidden{display:none}
 .footer{
   padding:34px 0;
@@ -491,7 +401,7 @@ input:focus,select:focus,textarea:focus{
 }
 @media (max-width:980px){
   .section{padding:72px 0}
-  .hero-content,.grid-3,.grid-2,.form-grid{grid-template-columns:1fr}
+  .hero-content,.grid-3,.form-grid{grid-template-columns:1fr}
   .menu-toggle{display:flex}
   .nav-links{
     position:absolute;
@@ -519,22 +429,11 @@ input:focus,select:focus,textarea:focus{
     width:100%;
     background:#f9fcff;
   }
-  .lang-switch{
-    width:100%;
-    justify-content:flex-start;
-    border-radius:18px;
-    padding:12px;
-  }
   .hero-content{padding-top:140px;}
 }
 @media (max-width:576px){
   .brand small{display:none}
   .nav-main a{font-size:13px}
-  .lang-btn{
-    width:100%;
-    justify-content:center;
-    font-size:12px;
-  }
 }
 </style>
 </head>
@@ -567,18 +466,6 @@ input:focus,select:focus,textarea:focus{
 <a href="#services">Услуги</a>
 <a href="#works">Примеры</a>
 <a href="#contact">Запись</a>
-</div>
-<div class="lang-switch">
-<span class="lang-label"><i class="fa fa-tooth"></i> Язык</span>
-<a href="index.html" class="lang-btn active">
-<img src="https://flagcdn.com/w20/ru.png" alt="ru"> RU
-</a>
-<a href="kg.html" class="lang-btn">
-<img src="https://flagcdn.com/w20/kg.png" alt="kg"> KG
-</a>
-<a href="uz.html" class="lang-btn">
-<img src="https://flagcdn.com/16x12/uz.png" alt="uz"> UZ
-</a>
 </div>
 </div>
 </div>
@@ -613,17 +500,64 @@ input:focus,select:focus,textarea:focus{
 <p class="sub">Чистый светлый дизайн, удобная запись и доверительный стиль помогают повысить конверсию в заявку.</p>
 <div class="grid-3">
 <div class="service-card">
-<div class="service-icon"><i class="fa fa-smile"></i></div>
+<div class="service-icon">
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="toothGrad1" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#ffffff"/>
+<stop offset="55%" stop-color="#dff0ff"/>
+<stop offset="100%" stop-color="#79b9ff"/>
+</linearGradient>
+<linearGradient id="toothShadow1" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#1f7cff" stop-opacity=".15"/>
+<stop offset="100%" stop-color="#1f7cff" stop-opacity="0"/>
+</linearGradient>
+</defs>
+<ellipse cx="64" cy="105" rx="32" ry="10" fill="url(#toothShadow1)"/>
+<path d="M36 40c0-16 12-28 28-28s28 12 28 28c0 16-6 26-9 40-2 8-6 20-11 20-4 0-6-9-8-16-1-5-2-7-6-7s-5 2-6 7c-2 7-4 16-8 16-5 0-9-12-11-20-3-14-7-24-7-40z" fill="url(#toothGrad1)" stroke="#8bc2ff" stroke-width="3" stroke-linejoin="round"/>
+<path d="M47 32c4-8 10-12 17-12" stroke="#ffffff" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+<path d="M56 48c2-5 5-7 8-7" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity=".85"/>
+</svg>
+</div>
 <h3>Забота об улыбке</h3>
 <p>Комплексный подход к здоровью зубов и десен.</p>
 </div>
 <div class="service-card">
-<div class="service-icon"><i class="fa fa-shield-heart"></i></div>
+<div class="service-icon">
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="shieldGrad" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#ffffff"/>
+<stop offset="50%" stop-color="#dbeeff"/>
+<stop offset="100%" stop-color="#5bb1ff"/>
+</linearGradient>
+</defs>
+<path d="M64 12l34 12v30c0 26-15 45-34 62-19-17-34-36-34-62V24l34-12z" fill="url(#shieldGrad)" stroke="#7cbcff" stroke-width="3" stroke-linejoin="round"/>
+<path d="M50 64l10 10 20-24" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</div>
 <h3>Безопасность</h3>
 <p>Стерильность, аккуратность и прозрачная коммуникация.</p>
 </div>
 <div class="service-card">
-<div class="service-icon"><i class="fa fa-calendar-check"></i></div>
+<div class="service-icon">
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="calendarGrad" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#ffffff"/>
+<stop offset="60%" stop-color="#e6f3ff"/>
+<stop offset="100%" stop-color="#7ebdff"/>
+</linearGradient>
+</defs>
+<rect x="22" y="28" width="84" height="78" rx="18" fill="url(#calendarGrad)" stroke="#8fc5ff" stroke-width="3"/>
+<rect x="22" y="42" width="84" height="18" rx="8" fill="#1f7cff" opacity=".15"/>
+<rect x="36" y="18" width="10" height="22" rx="5" fill="#1f7cff"/>
+<rect x="82" y="18" width="10" height="22" rx="5" fill="#1f7cff"/>
+<circle cx="46" cy="74" r="6" fill="#1f7cff"/>
+<circle cx="64" cy="74" r="6" fill="#1f7cff"/>
+<circle cx="82" cy="74" r="6" fill="#1f7cff"/>
+</svg>
+</div>
 <h3>Удобная запись</h3>
 <p>Быстрая форма заявки с выбором услуги и комментария.</p>
 </div>
@@ -645,17 +579,42 @@ input:focus,select:focus,textarea:focus{
 <p class="sub">Добавь сюда ключевые процедуры, чтобы пациент сразу видел основные услуги.</p>
 <div class="grid-3">
 <div class="service-card">
-<div class="service-icon"><i class="fa fa-tooth"></i></div>
+<div class="service-icon">
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><use href="#toothIcon"></use></svg>
+</div>
 <h3>Лечение зубов</h3>
 <p>Кариес, пульпит и восстановление зубов.</p>
 </div>
 <div class="service-card">
-<div class="service-icon"><i class="fa fa-face-smile-beam"></i></div>
+<div class="service-icon">
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="sparkGrad" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#ffffff"/>
+<stop offset="55%" stop-color="#dff0ff"/>
+<stop offset="100%" stop-color="#6db7ff"/>
+</linearGradient>
+</defs>
+<path d="M64 14l10 28 28 10-28 10-10 28-10-28-28-10 28-10 10-28z" fill="url(#sparkGrad)" stroke="#7cbcff" stroke-width="3" stroke-linejoin="round"/>
+</svg>
+</div>
 <h3>Отбеливание</h3>
 <p>Эстетика улыбки и улучшение цвета зубов.</p>
 </div>
 <div class="service-card">
-<div class="service-icon"><i class="fa fa-teeth"></i></div>
+<div class="service-icon">
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="implantGrad" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#ffffff"/>
+<stop offset="55%" stop-color="#dcefff"/>
+<stop offset="100%" stop-color="#67b2ff"/>
+</linearGradient>
+</defs>
+<path d="M48 20h32l-4 64c0 10-5 24-12 24s-12-14-12-24l-4-64z" fill="url(#implantGrad)" stroke="#8bc2ff" stroke-width="3" stroke-linejoin="round"/>
+<rect x="50" y="14" width="28" height="10" rx="5" fill="#1f7cff" opacity=".2"/>
+</svg>
+</div>
 <h3>Имплантация</h3>
 <p>Восстановление зубного ряда современными методами.</p>
 </div>
@@ -740,43 +699,63 @@ input:focus,select:focus,textarea:focus{
 </div>
 </footer>
 
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="toothIcon" viewBox="0 0 128 128">
+    <defs>
+      <linearGradient id="toothGrad2" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="55%" stop-color="#dff0ff"/>
+        <stop offset="100%" stop-color="#79b9ff"/>
+      </linearGradient>
+      <linearGradient id="toothShadow2" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#1f7cff" stop-opacity=".15"/>
+        <stop offset="100%" stop-color="#1f7cff" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="64" cy="105" rx="32" ry="10" fill="url(#toothShadow2)"/>
+    <path d="M36 40c0-16 12-28 28-28s28 12 28 28c0 16-6 26-9 40-2 8-6 20-11 20-4 0-6-9-8-16-1-5-2-7-6-7s-5 2-6 7c-2 7-4 16-8 16-5 0-9-12-11-20-3-14-7-24-7-40z" fill="url(#toothGrad2)" stroke="#8bc2ff" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M47 32c4-8 10-12 17-12" stroke="#ffffff" stroke-width="6" stroke-linecap="round" opacity=".8"/>
+    <path d="M56 48c2-5 5-7 8-7" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity=".85"/>
+  </symbol>
+</svg>
+
 <script>
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzd9y2Vr0Ma4KlNI6EOtlXcNOGzHQ9mh_nbyralhsFaVh7mRffS2SOXC8Yvnnng1LkPcQ/exec';
 
 const servicesWithIcons = [
-{ name: 'Лечение зубов', icon: 'fa fa-tooth' },
-{ name: 'Отбеливание', icon: 'fa fa-sparkles' },
-{ name: 'Имплантация', icon: 'fa fa-teeth' },
-{ name: 'Ортодонтия', icon: 'fa fa-braces' },
-{ name: 'Детская стоматология', icon: 'fa fa-child' },
-{ name: 'Протезирование', icon: 'fa fa-kit-medical' },
-{ name: 'Удаление зубов', icon: 'fa fa-scissors' },
-{ name: 'Пародонтология', icon: 'fa fa-heart' },
-{ name: 'Профчистка', icon: 'fa fa-wand-magic-sparkles' },
-{ name: 'Диагностика', icon: 'fa fa-x-ray' }
+  { name: 'Лечение зубов', icon: '#toothIcon' },
+  { name: 'Отбеливание', icon: '#toothIcon' },
+  { name: 'Имплантация', icon: '#toothIcon' },
+  { name: 'Ортодонтия', icon: '#toothIcon' },
+  { name: 'Детская стоматология', icon: '#toothIcon' },
+  { name: 'Протезирование', icon: '#toothIcon' },
+  { name: 'Удаление зубов', icon: '#toothIcon' },
+  { name: 'Пародонтология', icon: '#toothIcon' },
+  { name: 'Профчистка', icon: '#toothIcon' },
+  { name: 'Диагностика', icon: '#toothIcon' }
 ];
 
 const allServicesList = servicesWithIcons.map(s => s.name);
 
 const websitesList = [
-{
-name: 'Имплантация',
-url: '#',
-image: 'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=1200&q=80',
-description: 'Имплантация и восстановление улыбки.'
-},
-{
-name: 'Отбеливание',
-url: '#',
-image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80',
-description: 'Эстетическая стоматология и сияющая улыбка.'
-},
-{
-name: 'Детский приём',
-url: '#',
-image: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80',
-description: 'Дружелюбная детская стоматология.'
-}
+  {
+    name: 'Имплантация',
+    url: '#',
+    image: 'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=1200&q=80',
+    description: 'Имплантация и восстановление улыбки.'
+  },
+  {
+    name: 'Отбеливание',
+    url: '#',
+    image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80',
+    description: 'Эстетическая стоматология и сияющая улыбка.'
+  },
+  {
+    name: 'Детский приём',
+    url: '#',
+    image: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80',
+    description: 'Дружелюбная детская стоматология.'
+  }
 ];
 
 function showNotification(message, type){
@@ -826,7 +805,11 @@ function loadServicesWithIcons(){
     card.style.cursor = 'pointer';
     card.onclick = () => selectService(service.name);
     card.innerHTML = `
-      <div class="service-icon"><i class="${service.icon}"></i></div>
+      <div class="service-icon">
+        <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+          <use href="${service.icon}"></use>
+        </svg>
+      </div>
       <h3>${service.name}</h3>
       <p>Нажмите, чтобы автоматически выбрать услугу в форме.</p>
     `;
