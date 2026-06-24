@@ -64,6 +64,7 @@ img{max-width:100%;display:block}
   font-weight:800;
   box-shadow:var(--shadow);
   transition:.25s;
+  cursor:pointer;
 }
 .btn:hover{transform:translateY(-2px)}
 .btn.out{
@@ -352,8 +353,44 @@ input:focus,select:focus,textarea:focus{
   border-color:rgba(31,124,255,.45);
   box-shadow:0 0 0 4px rgba(31,124,255,.08);
 }
-#nomer{font-variant-numeric:tabular-nums;}
+.phone-fixed{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:12px;
+  align-items:center;
+}
+.phone-prefix{
+  padding:14px 16px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background:#eef6ff;
+  color:var(--blue);
+  font-weight:900;
+  white-space:nowrap;
+}
+.comment-full{grid-column:1 / -1;}
 .hidden{display:none}
+.loading{
+  color:var(--blue);
+  font-weight:800;
+  padding:10px 0;
+}
+.success-message{
+  margin-top:8px;
+  padding:12px 14px;
+  border-radius:14px;
+  border:1px solid transparent;
+}
+.success-message.success{
+  background:#dbeafe;
+  border-color:#60a5fa;
+  color:#1d4ed8;
+}
+.success-message.error{
+  background:#fee2e2;
+  border-color:#ef4444;
+  color:#dc2626;
+}
 .footer{
   padding:34px 0;
   border-top:1px solid var(--line);
@@ -380,22 +417,6 @@ input:focus,select:focus,textarea:focus{
   background:#f6fbff;
   border:1px solid var(--line);
   color:var(--blue);
-}
-.comment-full{grid-column:1 / -1;}
-.phone-fixed{
-  display:grid;
-  grid-template-columns:auto 1fr;
-  gap:12px;
-  align-items:center;
-}
-.phone-prefix{
-  padding:14px 16px;
-  border-radius:16px;
-  border:1px solid var(--line);
-  background:#eef6ff;
-  color:var(--blue);
-  font-weight:900;
-  white-space:nowrap;
 }
 @media (max-width:980px){
   .section{padding:72px 0}
@@ -432,6 +453,7 @@ input:focus,select:focus,textarea:focus{
 @media (max-width:576px){
   .brand small{display:none}
   .nav-main a{font-size:13px}
+  .phone-fixed{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -631,29 +653,29 @@ input:focus,select:focus,textarea:focus{
 <section class="section" id="contact">
 <div class="container">
 <h2 class="title">Запись на приём</h2>
-<p class="sub">Белая и синяя форма выглядит чисто и профессионально, а телефон удобно вводить как кыргызский номер.</p>
+<p class="sub">Заполните форму и мы свяжемся с вами в ближайшее время</p>
 <div class="form-box">
 <form id="orderForm" class="form">
 <div class="form-grid">
 <div>
-<label for="ism">Имя</label>
-<input id="ism" type="text" placeholder="Введите имя">
+<label for="ism">Имя *</label>
+<input id="ism" type="text" placeholder="Введите имя" required>
 </div>
 <div>
-<label for="familiya">Фамилия</label>
-<input id="familiya" type="text" placeholder="Введите фамилию">
+<label for="familiya">Фамилия *</label>
+<input id="familiya" type="text" placeholder="Введите фамилию" required>
 </div>
 <div class="phone-fixed">
 <div class="phone-prefix">+996</div>
 <div>
-<label for="nomer">Номер телефона</label>
-<input id="nomer" type="tel" placeholder="700 123 456" inputmode="numeric" maxlength="11">
+<label for="nomer">Номер телефона *</label>
+<input id="nomer" type="tel" placeholder="700 123 456" inputmode="numeric" maxlength="11" required>
 </div>
 </div>
 <div>
-<label for="xizmat">Выбор услуги</label>
-<select id="xizmat">
-<option value="">Услуги</option>
+<label for="xizmat">Выбор услуги *</label>
+<select id="xizmat" required>
+<option value="">Выберите услугу</option>
 </select>
 </div>
 <div class="comment-full">
@@ -662,11 +684,9 @@ input:focus,select:focus,textarea:focus{
 </div>
 </div>
 
-<button type="submit" class="btn submit-btn" style="width:fit-content">Записаться</button>
-<div class="loading hidden" style="color:var(--blue);font-weight:800">Отправка...</div>
-<div class="success-message hidden" style="margin-top:8px;padding:12px 14px;border-radius:14px;border:1px solid transparent">
-<span id="successMessage"></span>
-</div>
+<button type="submit" class="btn submit-btn">Записаться</button>
+<div class="loading hidden">Отправка...</div>
+<div class="success-message hidden" id="messageBox"></div>
 </form>
 </div>
 </div>
@@ -715,7 +735,10 @@ input:focus,select:focus,textarea:focus{
 </svg>
 
 <script>
+// ========== КОНФИГУРАЦИЯ ==========
+// ⚠️ БУЛ ЖЕРГЕ APPS SCRIPT URLИҢИЗДИ ЖАЗЫҢЫЗ
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9au347qjk976fcgXeVom4dF0MC8O57-rPKENqOE7dm0b2TM45l4k1npzJ-qQz7YhZ/exec';
+// =================================
 
 const servicesWithIcons = [
   { name: 'Лечение зубов', icon: '#toothIcon' },
@@ -754,40 +777,22 @@ const websitesList = [
 ];
 
 function showNotification(message, type){
-  const box = document.querySelector('.success-message');
-  const span = document.getElementById('successMessage');
-  span.textContent = message;
+  const box = document.getElementById('messageBox');
+  box.textContent = message;
+  box.className = 'success-message ' + type;
   box.style.display = 'block';
-  if(type === 'error'){
-    box.style.backgroundColor = '#fee2e2';
-    box.style.borderColor = '#ef4444';
-    box.style.color = '#dc2626';
-  } else {
-    box.style.backgroundColor = '#dbeafe';
-    box.style.borderColor = '#60a5fa';
-    box.style.color = '#1d4ed8';
-  }
-  setTimeout(() => box.style.display = 'none', 3000);
+  setTimeout(() => box.style.display = 'none', 5000);
 }
 
 function selectService(serviceName){
   const select = document.getElementById('xizmat');
-  let found = false;
   for(let i = 0; i < select.options.length; i++){
     if(select.options[i].value === serviceName){
       select.selectedIndex = i;
-      found = true;
       break;
     }
   }
-  if(!found){
-    const option = document.createElement('option');
-    option.value = serviceName;
-    option.textContent = serviceName;
-    select.appendChild(option);
-    select.value = serviceName;
-  }
-  document.getElementById('orderForm').scrollIntoView({behavior:'smooth'});
+  document.getElementById('contact').scrollIntoView({behavior:'smooth'});
   showNotification('✅ ' + serviceName + ' выбрано!', 'success');
 }
 
@@ -806,7 +811,7 @@ function loadServicesWithIcons(){
         </svg>
       </div>
       <h3>${service.name}</h3>
-      <p>Нажмите, чтобы автоматически выбрать услугу в форме.</p>
+      <p>Нажмите, чтобы автоматически выбрать услугу</p>
     `;
     servicesGrid.appendChild(card);
   });
@@ -859,6 +864,7 @@ document.getElementById('nomer').addEventListener('input', function(){
 
 document.getElementById('orderForm').addEventListener('submit', async function(e){
   e.preventDefault();
+  
   const ism = document.getElementById('ism').value.trim();
   const familiya = document.getElementById('familiya').value.trim();
   const nomer = document.getElementById('nomer').value.trim();
@@ -883,12 +889,11 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
   loading.style.display = 'block';
 
   const orderData = {
-    ism,
-    familiya,
+    ism: ism,
+    familiya: familiya,
     nomer: '+996 ' + nomer,
-    xizmat,
-    izoh,
-    vaqt: new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Bishkek' })
+    xizmat: xizmat,
+    izoh: izoh
   };
 
   try{
@@ -898,11 +903,14 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify(orderData)
     });
+    
     showNotification('✅ Заявка успешно отправлена!', 'success');
     document.getElementById('orderForm').reset();
-  }catch(error){
+    
+  } catch(error){
+    console.error('Error:', error);
     showNotification('❌ Ошибка отправки. Попробуйте ещё раз.', 'error');
-  }finally{
+  } finally{
     submitBtn.style.opacity = '1';
     submitBtn.disabled = false;
     loading.style.display = 'none';
