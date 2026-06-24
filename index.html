@@ -275,9 +275,7 @@ header.hero{
   gap:22px;
 }
 .service-card,
-.room-card,
-.spec-card,
-.review-card,
+.card,
 .contact-card{
   border-radius:var(--radius);
   background:#fff;
@@ -645,7 +643,6 @@ input:focus,select:focus,textarea:focus{
 <label for="familiya">Фамилия</label>
 <input id="familiya" type="text" placeholder="Введите фамилию">
 </div>
-
 <div class="phone-fixed">
 <div class="phone-prefix">+996</div>
 <div>
@@ -653,14 +650,12 @@ input:focus,select:focus,textarea:focus{
 <input id="nomer" type="tel" placeholder="700 123 456" inputmode="numeric" maxlength="11">
 </div>
 </div>
-
 <div>
 <label for="xizmat">Выбор услуги</label>
 <select id="xizmat">
 <option value="">Услуги</option>
 </select>
 </div>
-
 <div class="comment-full">
 <label for="izoh">Комментарий</label>
 <textarea id="izoh" placeholder="Опишите, что вас беспокоит"></textarea>
@@ -720,7 +715,7 @@ input:focus,select:focus,textarea:focus{
 </svg>
 
 <script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzd9y2Vr0Ma4KlNI6EOtlXcNOGzHQ9mh_nbyralhsFaVh7mRffS2SOXC8Yvnnng1LkPcQ/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwkeEw3qMZXsSvhyAnsni-N9GUFz4ASUZwgpHgzPW3VMDXcno6w9XKHY_4baZahZxZf/exec';
 
 const servicesWithIcons = [
   { name: 'Лечение зубов', icon: '#toothIcon' },
